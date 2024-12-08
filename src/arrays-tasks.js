@@ -549,8 +549,14 @@ function propagateItemsByPositionIndex(arr) {
  *    shiftArray(['a', 'b', 'c', 'd'], -1) => ['b', 'c', 'd', 'a']
  *    shiftArray([10, 20, 30, 40, 50], -3) => [40, 50, 10, 20, 30]
  */
-function shiftArray(/* arr, n */) {
-  throw new Error('Not implemented');
+function shiftArray(arr, n) {
+  const ar = [...Array(Math.abs(n))];
+  if (n > 0) {
+    ar.filter(() => arr.unshift(arr.pop()));
+  } else {
+    ar.filter(() => arr.push(arr.shift()));
+  }
+  return arr;
 }
 
 /**
@@ -566,8 +572,20 @@ function shiftArray(/* arr, n */) {
  *   sortDigitNamesByNumericOrder([ 'nine','eight','nine','eight' ]) => [ 'eight','eight','nine','nine']
  *   sortDigitNamesByNumericOrder([ 'one','one','one','zero' ]) => [ 'zero','one','one','one' ]
  */
-function sortDigitNamesByNumericOrder(/* arr */) {
-  throw new Error('Not implemented');
+function sortDigitNamesByNumericOrder(arr) {
+  const dict = [
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+  ];
+  return arr.sort((a, b) => dict.indexOf(a) - dict.indexOf(b));
 }
 
 /**
@@ -589,8 +607,14 @@ function sortDigitNamesByNumericOrder(/* arr */) {
  *   swapHeadAndTail([]) => []
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  if (arr.length < 2) return arr;
+  let work = arr;
+  const ar = [...Array(Math.floor(arr.length / 2))];
+  const head = ar.map(() => work.shift());
+  const tail = ar.map(() => work.pop()).reverse();
+  work = [...tail, ...work, ...head];
+  return work;
 }
 
 module.exports = {
